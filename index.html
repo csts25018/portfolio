@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | 大迫 汰透</title>
+    <!-- Google Fonts: Noto Sans JP (日本語フォント) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome (アイコン用CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 基本設定 --- */
+        :root {
+            --primary-color: #0066cc; /* 知的な青 */
+            --accent-color: #4da6ff;  /* 明るい青 */
+            --bg-color: #f4f8fb;      /* 薄い青みがかった白 */
+            --text-color: #333333;    /* 濃いグレー */
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- レイアウト用ユーティリティ --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* --- ヘッダー --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- ヒーローセクション（ファーストビュー） --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 70px; /* ヘッダー分 */
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- 自己紹介セクション --- */
+        #profile {
+            background-color: var(--white);
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            border-radius: 20px;
+            padding: 40px;
+            gap: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-icon-box {
+            flex-shrink: 0;
+            width: 150px;
+            height: 150px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--accent-color);
+            color: var(--primary-color);
+            font-size: 4rem;
+        }
+
+        .profile-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .profile-info-list {
+            margin-top: 15px;
+        }
+
+        .profile-info-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-info-list i {
+            width: 30px;
+            color: var(--accent-color);
+        }
+
+        /* --- スキルセクション（追加部分） --- */
+        #skills {
+            background-color: var(--bg-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+            border-bottom: 5px solid var(--primary-color);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .skill-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: #e6f2ff;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* --- ガクチカセクション --- */
+        #gakuchika {
+            background-color: var(--white); /* 背景色を白に変更してメリハリ */
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .process-item {
+            background: var(--bg-color); /* 背景色を薄青に変更 */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .process-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+        }
+
+        .process-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .text-box {
+            background-color: var(--bg-color); /* 背景色を薄青に変更 */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .text-box::before {
+            content: '\f10d';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 3rem;
+            color: var(--accent-color);
+            background-color: var(--white);
+            padding: 0 10px;
+            border-radius: 50%; /* 引用符の背景を丸く */
+        }
+
+        .highlight {
+            background: linear-gradient(transparent 70%, #cce6ff 70%);
+            font-weight: bold;
+        }
+
+        /* --- フッター --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- レスポンシブ対応 --- */
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 0 20px;
+            }
+            nav { display: none; }
+            .hero-content h1 { font-size: 2rem; }
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .profile-info-list li { justify-content: center; }
+            .section-title { font-size: 1.5rem; }
+            .text-box { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="#"><i class="fa-solid fa-code"></i>My Portfolio</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#gakuchika">Academic</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- ヒーローセクション -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-icon">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h1>Make It Simple</h1>
+                <p>Information Technology Student Portfolio</p>
+            </div>
+        </section>
+
+        <!-- 自己紹介 -->
+        <section id="profile">
+            <div class="container">
+                <h2 class="section-title">Profile</h2>
+                <div class="profile-card">
+                    <div class="profile-icon-box">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="profile-text">
+                        <h3>大迫 汰透</h3>
+                        <p>日本大学で情報技術を学ぶエンジニア志望の学生です。低レイヤーからアプリケーション開発まで幅広く興味を持っています。特にアルゴリズムの構築と、ユーザーを楽しませるインタラクションの実装に関心があります。</p>
+                        <ul class="profile-info-list">
+                            <li>
+                                <i class="fa-solid fa-university"></i>
+                                所属：日本大学　理工学部　応用情報工学科
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                居住地：千葉県
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                連絡先：csts25018@g.nihon-u.ac.jp
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- スキルセット（追加） -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <!-- C++ -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <h3>C++</h3>
+                        <p>競技プログラミングで使用。<br>アルゴリズムとデータ構造の実装に注力。</p>
+                        <span class="skill-tag">AtCoder / 競プロ</span>
+                    </div>
+                    
+                    <!-- C言語 -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h3>C Language</h3>
+                        <p>大学の授業にて履修。<br>ポインタやメモリ管理など計算機の基礎を習得。</p>
+                        <span class="skill-tag">基礎 / 授業</span>
+                    </div>
+
+                    <!-- C# -->
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3>C#</h3>
+                        <p>ゲーム制作を通して学習中。<br>オブジェクト指向設計を実践的に学んでいます。</p>
+                        <span class="skill-tag">Unity / 開発</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ガクチカ -->
+        <section id="gakuchika">
+            <div class="container">
+                <h2 class="section-title">Student Efforts</h2>
+                <p style="text-align: center; margin-bottom: 30px;">目標達成のための課題分析と実行プロセス</p>
+
+                <!-- プロセスステップ -->
+                <div class="process-grid">
+                    <div class="process-item">
+                        <div class="process-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <span class="process-title">現状分析</span>
+                        <p>基礎学力テストでの点数不足を課題と特定し、暗記分野への集中を決定。</p>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-icon"><i class="fa-solid fa-list-check"></i></div>
+                        <span class="process-title">戦略的実行</span>
+                        <p>自分に合う教材選定と、隙間時間を活用した反復学習を徹底。</p>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-icon"><i class="fa-solid fa-trophy"></i></div>
+                        <span class="process-title">成果</span>
+                        <p>2科目で80点以上を取得し、第一志望学科への進学を達成。</p>
+                    </div>
+                </div>
+
+                <!-- 文章本文 -->
+                <div class="text-box">
+                    <p>
+                        私は、目標達成のための課題分析と実行に注力しました。応用情報工学科への進学を目指す上で、判定に重要な基礎学力到達度テストでの英語と国語の点数不足が課題でした。<br><br>
+                        私は、限られた時間で成果を出すには、まず「<span class="highlight">基礎的な暗記分野</span>」の克服が最善と分析し、英語は「英単語」、国語は「古語」に学習を集中させました。<br><br>
+                        学習の質を高めるため、学校配布の教材にこだわらず自分に合う単語帳を主体的に選定し、通学の電車時間を活用して「覚える」と「自分でテストする」という<span class="highlight">反復学習を徹底</span>しました。<br><br>
+                        この地道な取り組みにより、結果として両科目で80点以上を取得し、第一志望の学科への進学を果たすことができました。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 My Portfolio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
